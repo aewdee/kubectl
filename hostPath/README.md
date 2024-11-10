@@ -1,4 +1,5 @@
 # kubectl
+```
 # Create Namespace, Deployment, Service และ Ingress
 kubectl create ns my-web --dry-run=client -o yaml
 kubectl create deployment myweb --image=nginx -n my-web --dry-run=client -o yaml
@@ -18,3 +19,4 @@ ls /usr/share/nginx/secret
 
 # Delete All Namespace
 kubectl delete ns my-web
+```
