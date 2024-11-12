@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  name: basic-routing
+  labels:
+    app: routing-types
+    type: basic-routing
+  namespace: ingress-testing
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp1-svc
+            port:
+              number: 80
+status:
+  loadBalancer: {}

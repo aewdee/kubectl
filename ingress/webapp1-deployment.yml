@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: webapp1
+  name: webapp1
+  namespace: ingress-testing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: webapp1
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: webapp1-svc
+  name: webapp1-svc
+  namespace: ingress-testing
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: webapp1-svc
+  type: ClusterIP
+status:
+  loadBalancer: {}
