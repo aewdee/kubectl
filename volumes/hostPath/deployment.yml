@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: myweb
+  name: myweb
+  namespace: myns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweb
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+        volumeMounts:
+        - name: hostpath-volume
+          mountPath: /usr/share/nginx/html
+        - name: configmap-vol
+          mountPath: /usr/share/nginx/html/app/config
+        - name: secret-volume
+          mountPath: /usr/share/nginx/secret
+      volumes:
+      - name: hostpath-volume
+        hostPath:
+          path: /Users/mc/k8s/kubectl/hostPath/html
+          type: Directory
+      - name: configmap-vol
+        configMap:
+          name: myweb-configmap
+      - name: secret-volume
+        secret:
+          secretName: myweb-secret
+
+status: {}
